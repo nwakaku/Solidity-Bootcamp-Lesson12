@@ -18,18 +18,18 @@ async function main() {
     const minter = "0x949b185ad4bb20c9A8Af5638D6E76dC0c18b9CdB"
     const amount = ethers.utils.parseEther("5");
 
-    let ballotContract: MyToken;
+    let tContract: MyToken;
     const tokenContract = new MyToken__factory(signer);
-    ballotContract = tokenContract.attach(contractAddress);
-    console.log(`Attached to contract deployed at address ${ballotContract.address}`);
-    const tx = await ballotContract.mint(minter, amount);
-    await tx.wait()
+    tContract = tokenContract.attach(contractAddress);
+    console.log(`Attached to contract deployed at address ${tContract.address}`);
+    const delegateTx = await tContract.delegate(minter);
+    await delegateTx.wait()
     // console.log({ receipt });
-    let voterTokenBalance = await ballotContract.balanceOf(minter);
-    console.log(`After minting, the voter has a total of ${voterTokenBalance} decimal units\n`)
+    let voterTokenBalance = await tContract.balanceOf(minter);
+    console.log(`After self delegation, the voter has a total of ${voterTokenBalance} decimal units\n`)
 
-    let votePower = await ballotContract.getVotes(minter);
-    console.log(`After minting, the voter has a total of ${votePower} voting power units\n`);
+    let votePower = await tContract.getVotes(minter);
+    console.log(`After self delegation, the voter has a total of ${votePower} voting power units\n`);
 
 }
 

@@ -23,10 +23,9 @@ async function main() {
     console.log(`The balance of this account is ${balanceBN.toString()} Wei`);
 
     const args = process.argv;
-    const param = args.slice(2);
-    const mVoteToken = param[0];
-    const block = param[1];
-    const proposals = param.slice(2);
+    const mVoteToken = "0xd13E7A962B93cFa84ab7435818F7d79b8e03B05e";
+    const block = 8012213;
+    const proposals = ['Chocolate', 'Vanilla', 'Strawberry', 'Lime'];
     
     if (proposals.length <= 0) throw new Error("Not enough parameters")
     console.log(block);
